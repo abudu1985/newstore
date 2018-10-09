@@ -1,0 +1,9 @@
+create_item:
+    path: /item
+    methods: [POST]
+    controller: AppBundle:Items:new
+
+get_all_items:
+    path: /items
+    methods: [GET]
+    controller: AppBundle:Items:fetch

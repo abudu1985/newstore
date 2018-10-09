@@ -1,0 +1,10 @@
+devices:
+    resource: 'routing/devices.yml'
+    prefix: /devices
+
+users:
+    resource: 'routing/users.yml'
+
+orders:
+    resource: 'routing/orders.yml'
+    prefix: /orders

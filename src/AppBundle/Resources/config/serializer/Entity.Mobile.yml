@@ -1,0 +1,14 @@
+AppBundle\Entity\Mobile:
+    exclusion_policy: ALL
+    properties:
+        id:
+            read_only: true
+            groups: [default, create]
+        memory:
+            type: integer
+            groups: [default, create]
+        ram:
+            type: float
+            groups: [default, create]
+
+

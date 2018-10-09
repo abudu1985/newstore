@@ -1,0 +1,5 @@
+AppBundle\Entity\Hoover:
+    type: entity
+    fields:
+        power:
+            type: integer

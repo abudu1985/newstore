@@ -1,0 +1,60 @@
+AppBundle\Entity\Orders:
+    type: entity
+    table: orders
+    indexes:
+        IDX_E52FFDEEA76ED395:
+            columns:
+                - user_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        createDate:
+            type: datetime
+            nullable: false
+            column: create_date
+        updatedDate:
+            type: datetime
+            nullable: true
+            column: updated_date
+        totalQty:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: total_qty
+        totalPrice:
+            type: decimal
+            nullable: false
+            precision: 19
+            scale: 2
+            column: total_price
+        orderItems:
+            type: text
+            nullable: false
+            length: 0
+            options:
+                fixed: false
+            column: order_items
+    manyToOne:
+        orderUser:
+            targetEntity: AppBundle\Entity\User
+            inversedBy: orders
+            nullable: false
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller\Api;
+namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -93,22 +93,16 @@ class PostController extends Controller
         );
 
         return new JsonResponse($response,Response::HTTP_CREATED);
+
+
+
     }
 
     /**
-     *
-     * @Route("/api/posts",name="list_posts")
-     * @Method({"GET"})
+     * @return JsonResponse
      */
-
-    public function listPost()
+    public function listPostAction()
     {
-        $user = $this->getUser();
-        if ($user->hasRole('ROLE_USER'))
-        {
-            var_dump($user);exit();
-        }
-
         $posts=$this->getDoctrine()->getRepository('AppBundle:Post')->findAll();
 
         if (!count($posts)){
@@ -120,7 +114,8 @@ class PostController extends Controller
                 'result'=>null
 
             );
-            
+
+
             return new JsonResponse($response, Response::HTTP_NOT_FOUND);
         }
 

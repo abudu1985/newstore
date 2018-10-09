@@ -1,0 +1,27 @@
+AppBundle\Entity\Orders:
+    exclusion_policy: ALL
+    properties:
+        id:
+            read_only: true
+            groups: [default, create, list]
+        name:
+            type: string
+            groups: [default, create, list]
+        createDate:
+            type: datetime
+            groups: [default, create, list]
+        updatedDate:
+            type: datetime
+            groups: [default, create, list]
+        totalQty:
+            type: integer
+            groups: [default, create, list]
+        totalPrice:
+            type: float
+            groups: [default, create, list]
+        orderItems:
+            type: string
+            groups: [default, create, list]
+        user_id:
+            type: integer
+            groups: [default, create, list]

@@ -1,0 +1,52 @@
+AppBundle\Entity\Device:
+    properties:
+        color:
+            - NotBlank: ~
+            - Length:
+                min: 3
+        price:
+            - NotBlank: ~
+            - Type:
+                type: numeric
+                message: The value {{ value }} is not a valid {{ type }}.
+        firm:
+            - NotBlank: ~
+            - Type:
+                type: string
+                message: The value {{ value }} is not a valid {{ type }}.
+
+AppBundle\Entity\Hoover:
+    properties:
+        power:
+            - NotBlank: ~
+            - Type:
+                type: numeric
+                message: The value {{ value }} is not a valid {{ type }}.
+            - NotEqualTo:
+                value: 0
+
+AppBundle\Entity\Mobile:
+    properties:
+        memory:
+            - NotBlank: ~
+            - Type:
+                type: numeric
+                message: The value {{ value }} is not a valid {{ type }}.
+        ram:
+            - NotBlank: ~
+            - Type:
+                type: numeric
+                message: The value {{ value }} is not a valid {{ type }}.
+
+AppBundle\Entity\Freezer:
+    properties:
+        temperature:
+            - NotBlank: ~
+            - Type:
+                type: numeric
+                message: The value {{ value }} is not a valid {{ type }}.
+            - Range:
+                min: -40
+                max: 5
+                minMessage: temperature must be not less then -40C
+                maxMessage: temperature must be not more then 5C

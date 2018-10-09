@@ -31,5 +31,19 @@ class User extends BaseUser
     {
         return $this->id;
     }
+
+    private $orders;
+
+    /**
+     * @return array
+     */
+    public function getPublicInfo()
+    {
+        $arr = [];
+        $arr['id']      = $this->getId();
+        $arr['usernamename']    = $this->getUsername();
+        $arr['email'] = $this->getEmail();
+        return $arr;
+    }
 }
 

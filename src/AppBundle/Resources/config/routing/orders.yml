@@ -1,0 +1,9 @@
+get_all_orders:
+    path: /
+    methods: [GET]
+    controller: AppBundle:Orders:fetch
+
+create_order:
+    path: /
+    methods: [POST]
+    controller: AppBundle:Orders:new

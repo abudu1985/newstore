@@ -1,0 +1,5 @@
+AppBundle\Entity\Freezer:
+    type: entity
+    fields:
+        temperature:
+            type: integer

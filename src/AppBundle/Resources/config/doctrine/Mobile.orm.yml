@@ -1,0 +1,9 @@
+AppBundle\Entity\Mobile:
+    type: entity
+    fields:
+        memory:
+            type: integer
+        ram:
+            type: decimal
+            precision: 19
+            scale: 2

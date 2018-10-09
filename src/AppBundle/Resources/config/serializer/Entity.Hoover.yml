@@ -1,0 +1,10 @@
+AppBundle\Entity\Hoover:
+    exclusion_policy: ALL
+    properties:
+        id:
+            read_only: true
+            groups: [default, create]
+        power:
+            type: integer
+            groups: [default, create]
+

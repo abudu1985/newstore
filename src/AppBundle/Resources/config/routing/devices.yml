@@ -1,0 +1,33 @@
+create_hoover:
+    path: /hoover
+    methods: [POST]
+    controller: AppBundle:Hoover:createHoover
+
+create_mobile:
+    path: /mobile
+    methods: [POST]
+    controller: AppBundle:Mobile:createMobile
+
+create_freezer:
+    path: /freezer
+    methods: [POST]
+    controller: AppBundle:Freezer:createFreezer
+
+get_all_devices:
+    path: /
+    controller: AppBundle:Device:getAll
+    methods: [GET]
+
+get_devices_by_type:
+    path: /{alies}
+    controller: AppBundle:Device:findAllByAlies
+    methods: [GET]
+    requirements:
+        alies: \w+
+
+get_device_by_id:
+    path: /{id}
+    controller: AppBundle:Device:getOne
+    methods: [GET]
+    requirements:
+        id: \d+

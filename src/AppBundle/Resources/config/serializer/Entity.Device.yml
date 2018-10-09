@@ -1,0 +1,15 @@
+AppBundle\Entity\Device:
+    exclusion_policy: ALL
+    properties:
+        id:
+            read_only: true
+            groups: [default, create]
+        color:
+            type: string
+            groups: [default, create]
+        price:
+            type: float
+            groups: [default, create]
+        firm:
+            type: string
+            groups: [default, create]

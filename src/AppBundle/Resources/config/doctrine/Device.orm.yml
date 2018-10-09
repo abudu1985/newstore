@@ -1,0 +1,41 @@
+AppBundle\Entity\Device:
+    type: entity
+    inheritanceType: SINGLE_TABLE
+    discriminatorColumn:
+        name: discr
+        type: string
+    discriminatorMap:
+        device: Device
+        mobile: Mobile
+        hoover: Hoover
+        freezer: Freezer
+    table: device
+    repositoryClass: AppBundle\Repository\DeviceRepository
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        color:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+        price:
+            type: decimal
+            nullable: false
+            precision: 19
+            scale: 2
+        firm:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

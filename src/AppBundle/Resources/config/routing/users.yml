@@ -1,0 +1,9 @@
+create_user:
+    path: /users
+    methods: [GET]
+    controller: AppBundle:Users:fetch
+
+#get_all_users:
+#    path: /user
+#    methods: [POST]
+#    controller: AppBundle:Users:new

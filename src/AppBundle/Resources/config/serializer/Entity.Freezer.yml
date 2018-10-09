@@ -1,0 +1,11 @@
+AppBundle\Entity\Freezer:
+    exclusion_policy: ALL
+    properties:
+        id:
+            read_only: true
+            groups: [default, create]
+        temperature:
+            type: integer
+            groups: [default, create]
+
+
