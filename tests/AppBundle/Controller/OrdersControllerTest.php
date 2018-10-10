@@ -1,124 +1,45 @@
 <?php
 namespace App\Tests\Controller;
 
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class OrdersControllerTest extends WebTestCase
+class OrdersControllerTest extends ApiControllerTest
 {
-    private $token;
+
     /**
-     * Create a client with a default Authorization header.
      *
-     * @param string $username
-     * @param string $password
-     *
-     * @return \Symfony\Bundle\FrameworkBundle\Client
      */
-//    protected function createAuthenticatedClient($username = 'go', $password = '123456')
-//    {
-//        $client = static::createClient();
-//        $client->request(
-//            'POST',
-//            '/api/login_check',
-//            array(
-//                'username' => $username,
-//                'password' => $password,
-//            )
-//        );
-//
-//        $data = json_decode($client->getResponse()->getContent(), true);
-//
-//       // $client = static::createClient();
-//        $client->setServerParameter('HTTP_Authorization', sprintf('Bearer %s', $data['token']));
-//
-//        return $client;
-//    }
-//
-//    /**
-//     * test getPagesAction
-//     */
-//    public function testGetPages()
-//    {
-//        $client = $this->createAuthenticatedClient();
-//        $client->request('GET', '/api/pages');
-//        // ...
-//    }
-
-    public function testGet()
+    public function testGetAllOrdersAction()
     {
-        $username = 'go';
-        $password = '123456';
-        $client = static::createClient();
-        $client->request(
-            'POST',
-            '/api/login_check',
-            array(
-                'username' => $username,
-                'password' => $password,
-            )
+        $token = $this->createUser('ROLE_ADMIN');
+        $this->client->request('GET', '/api/orders/'
+            , [] , []
+            , ['CONTENT_TYPE' => 'application/json', 'HTTP_AUTHORIZATION' => 'Bearer '. $token]
         );
 
-        $data = json_decode($client->getResponse()->getContent(), true);
-
-        $header = array(
-            'HTTP_Authorization' => sprintf('%s %s', 'Bearer', $data['token']),
-            'HTTP_CONTENT_TYPE' => 'application/json',
-            'HTTP_ACCEPT'       => 'application/json',
-        );
-
-        $client->request(
-            'GET',
-            '/api/orders',
-            array(),
-            array(),
-            $header
-        );
-        var_dump($client->getResponse()->getContent());exit();
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertJson($client->getResponse()->getContent());
+        $this->assertEquals(200 , $this->client->getResponse()->getStatusCode());
+        $this->assertJson($this->client->getResponse()->getContent());
     }
 
-//    public function testPost()
-//    {
-//        //$client = static::createClient();
-//        $username = 'go';
-//        $password = '123456';
-//        $client = static::createClient();
-//        $client->request(
-//            'POST',
-//            '/api/login_check',
-//            array(
-//                'username' => $username,
-//                'password' => $password,
-//            )
-//        );
-//
-//        $data = json_decode($client->getResponse()->getContent(), true);
-//        $testData = [
-//            "name" => "new order55",
-//            "user" => ["id" => 4],
-//            "items" => [
-//                ["id" => 1, "qty" => "6"],
-//                ["id" => 3, "qty" => "3"],
-//                ["id" => 2, "qty" => 2]]
-//        ];
-//
-//       // $client->request('POST', '/order', $testData, array());
-//   //var_dump($data['token']);exit();
-//
-//        $client->request(
-//            'POST',
-//            '/api/orders',
-//            $testData,
-//            array(),
-//            [],
-//            array(
-//                'Authorization:' => 'Bearer ' . $data['token'],
-//                'Content-Type' => "application/json"
-//            )
-//        );
-//        $this->assertEquals(201, $client->getResponse()->getStatusCode());
-//        $this->assertContains('Order saved!', $client->getResponse()->getContent());
-//    }
+    /**
+     *
+     */
+    public function testPostCreateOrder()
+    {
+        $testData = [
+            "name" => "new order55",
+            "user" => ["id" => 4],
+            "items" => [
+                ["id" => 1, "qty" => "6"],
+                ["id" => 3, "qty" => "3"],
+                ["id" => 2, "qty" => 2]]
+        ];
+
+        $token = $this->createUser('ROLE_ADMIN');
+        $this->client->request('POST', '/api/orders/'
+            , $testData , []
+            , ['CONTENT_TYPE' => 'application/json', 'HTTP_AUTHORIZATION' => 'Bearer '. $token]
+        );
+        $this->assertJson($this->client->getResponse()->getContent());
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+    }
 }

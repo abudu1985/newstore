@@ -83,3 +83,14 @@ lexik_jwt_authentication:
     public_key_path:  '%kernel.root_dir%/../var/jwt/public.pem'
     pass_phrase:      igor
     token_ttl:        13600
+
+easy_admin:
+    site_name: 'store'
+    entities:
+        # change the following to the namespaces of your own entities
+        - AppBundle\Entity\Orders
+        - AppBundle\Entity\User
+        - AppBundle\Entity\Device
+        - AppBundle\Entity\Mobile
+        - AppBundle\Entity\Hoover
+        - AppBundle\Entity\Freezer
