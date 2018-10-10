@@ -1,9 +1,9 @@
 newstore
 ========
 
-A Symfony project created on October 9, 2018, 9:44 am.
-Create user with command   <b>php bin/console fos:user:create testuser test@example.com p@ssword</b>
-Grand user with some role  <b>php bin/console fos:user:promote testuser ROLE_ADMIN</b>
+A Symfony project created on October 9, 2018, 9:44 am.</br>
+Create user with command   <b>php bin/console fos:user:create testuser test@example.com p@ssword</b></br>
+Grand user with some role  <b>php bin/console fos:user:promote testuser ROLE_ADMIN</b></br>
 
 Then you can get token like this
 
