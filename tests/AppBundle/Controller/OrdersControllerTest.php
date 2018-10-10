@@ -15,40 +15,8 @@ class OrdersControllerTest extends WebTestCase
      *
      * @return \Symfony\Bundle\FrameworkBundle\Client
      */
-    protected function createAuthenticatedClient($username = 'go', $password = '123456')
-    {
-        $client = static::createClient();
-        $client->request(
-            'POST',
-            '/api/login_check',
-            array(
-                'username' => $username,
-                'password' => $password,
-            )
-        );
-
-        $data = json_decode($client->getResponse()->getContent(), true);
-
-       // $client = static::createClient();
-        $client->setServerParameter('HTTP_Authorization', sprintf('Bearer %s', $data['token']));
-
-        return $client;
-    }
-//
-//    /**
-//     * test getPagesAction
-//     */
-//    public function testGetPages()
+//    protected function createAuthenticatedClient($username = 'go', $password = '123456')
 //    {
-//        $client = $this->createAuthenticatedClient();
-//        $client->request('GET', '/api/pages');
-//        // ...
-//    }
-
-//    public function testGet()
-//    {
-//        $username = 'go';
-//        $password = '123456';
 //        $client = static::createClient();
 //        $client->request(
 //            'POST',
@@ -61,24 +29,24 @@ class OrdersControllerTest extends WebTestCase
 //
 //        $data = json_decode($client->getResponse()->getContent(), true);
 //
-//        $client->request(
-//            'GET',
-//            '/api/orders',
-//            array(),
-//            array(),
-//            array(
-//                'Authorization:' => 'Bearer ' . $data['token'],
-//                'Content-Type' => "application/json"
-//            )
-//        );
-//        //var_dump($client->getResponse()->getContent());exit();
-//        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-//        $this->assertJson($client->getResponse()->getContent());
+//       // $client = static::createClient();
+//        $client->setServerParameter('HTTP_Authorization', sprintf('Bearer %s', $data['token']));
+//
+//        return $client;
+//    }
+//
+//    /**
+//     * test getPagesAction
+//     */
+//    public function testGetPages()
+//    {
+//        $client = $this->createAuthenticatedClient();
+//        $client->request('GET', '/api/pages');
+//        // ...
 //    }
 
-    public function testPost()
+    public function testGet()
     {
-        //$client = static::createClient();
         $username = 'go';
         $password = '123456';
         $client = static::createClient();
@@ -92,27 +60,65 @@ class OrdersControllerTest extends WebTestCase
         );
 
         $data = json_decode($client->getResponse()->getContent(), true);
-        $testData = [
-            "name" => "new order55",
-            "user" => ["id" => 4],
-            "items" => [
-                ["id" => 1, "qty" => "6"],
-                ["id" => 3, "qty" => "3"],
-                ["id" => 2, "qty" => 2]]
-        ];
 
-       // $client->request('POST', '/order', $testData, array());
-        $client->request(
-            'POST',
-            '/api/orders',
-            $testData,
-            array(),
-            array(
-                'Authorization:' => 'Bearer ' . $data['token'],
-                'Content-Type' => "application/json"
-            )
+        $header = array(
+            'HTTP_Authorization' => sprintf('%s %s', 'Bearer', $data['token']),
+            'HTTP_CONTENT_TYPE' => 'application/json',
+            'HTTP_ACCEPT'       => 'application/json',
         );
-        $this->assertEquals(201, $client->getResponse()->getStatusCode());
-        $this->assertContains('Order saved!', $client->getResponse()->getContent());
+
+        $client->request(
+            'GET',
+            '/api/orders',
+            array(),
+            array(),
+            $header
+        );
+        var_dump($client->getResponse()->getContent());exit();
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertJson($client->getResponse()->getContent());
     }
+
+//    public function testPost()
+//    {
+//        //$client = static::createClient();
+//        $username = 'go';
+//        $password = '123456';
+//        $client = static::createClient();
+//        $client->request(
+//            'POST',
+//            '/api/login_check',
+//            array(
+//                'username' => $username,
+//                'password' => $password,
+//            )
+//        );
+//
+//        $data = json_decode($client->getResponse()->getContent(), true);
+//        $testData = [
+//            "name" => "new order55",
+//            "user" => ["id" => 4],
+//            "items" => [
+//                ["id" => 1, "qty" => "6"],
+//                ["id" => 3, "qty" => "3"],
+//                ["id" => 2, "qty" => 2]]
+//        ];
+//
+//       // $client->request('POST', '/order', $testData, array());
+//   //var_dump($data['token']);exit();
+//
+//        $client->request(
+//            'POST',
+//            '/api/orders',
+//            $testData,
+//            array(),
+//            [],
+//            array(
+//                'Authorization:' => 'Bearer ' . $data['token'],
+//                'Content-Type' => "application/json"
+//            )
+//        );
+//        $this->assertEquals(201, $client->getResponse()->getStatusCode());
+//        $this->assertContains('Order saved!', $client->getResponse()->getContent());
+//    }
 }
